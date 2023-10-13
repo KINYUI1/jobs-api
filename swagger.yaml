@@ -1,0 +1,423 @@
+openapi: 3.0.0
+info:
+  title: jobs api
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://jobs-api-8p9p.onrender.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - auth
+      summary: register
+      operationId: register
+      parameters:
+      - name: Cache-Control
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: no-cache
+      - name: Postman-Token
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: <calculated when request is sent>
+      - name: Content-Length
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: <calculated when request is sent>
+      - name: Host
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: <calculated when request is sent>
+      - name: User-Agent
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: PostmanRuntime/7.32.1
+      - name: Accept
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: '*/*'
+      - name: Accept-Encoding
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: gzip, deflate, br
+      - name: Connection
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: keep-alive
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/registerrequest'
+              - example:
+                  name: john smith
+                  email: john@gmail.com
+                  password: '123456'
+            example:
+              name: john smith
+              email: john@gmail.com
+              password: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - auth
+      summary: login
+      operationId: login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/loginrequest'
+              - example:
+                  email: peter3@gmail.com
+                  password: '123456'
+            example:
+              email: peter3@gmail.com
+              password: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+      - jobs
+      summary: create job
+      operationId: createjob
+      parameters:
+      - name: Cache-Control
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: no-cache
+      - name: Postman-Token
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: <calculated when request is sent>
+      - name: Content-Length
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: <calculated when request is sent>
+      - name: Host
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: <calculated when request is sent>
+      - name: User-Agent
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: PostmanRuntime/7.32.1
+      - name: Accept
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: '*/*'
+      - name: Accept-Encoding
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: gzip, deflate, br
+      - name: Connection
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: keep-alive
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createjobrequest'
+              - example:
+                  company: apple
+                  position: software engineer2
+            example:
+              company: apple
+              position: software engineer2
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - jobs
+      summary: get all jobs
+      operationId: getalljobs
+      parameters:
+      - name: Cache-Control
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: no-cache
+      - name: Postman-Token
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: <calculated when request is sent>
+      - name: Host
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: <calculated when request is sent>
+      - name: User-Agent
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: PostmanRuntime/7.32.1
+      - name: Accept
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: '*/*'
+      - name: Accept-Encoding
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: gzip, deflate, br
+      - name: Connection
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: keep-alive
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+      - jobs
+      summary: get job
+      operationId: getjob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - jobs
+      summary: update job
+      operationId: updatejob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updatejobrequest'
+              - example:
+                  company: google
+                  position: front end engineer
+            example:
+              company: google
+              position: front end engineer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - jobs
+      summary: delete job
+      operationId: deletejob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    registerrequest:
+      title: registerrequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: john smith
+        email: john@gmail.com
+        password: '123456'
+    loginrequest:
+      title: loginrequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: peter3@gmail.com
+        password: '123456'
+    createjobrequest:
+      title: createjobrequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: apple
+        position: software engineer2
+    updatejobrequest:
+      title: updatejobrequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: google
+        position: front end engineer
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: auth
+  description: ''
+- name: jobs
+  description: ''

@@ -11,6 +11,10 @@ const authenticationMiddleware = require('./middleware/authentication')
 const express = require('express');
 const app = express();
 
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocumentation = YAML.load('./swagger.yaml')
+
 // error handler
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
@@ -27,8 +31,10 @@ app.use(xss())
 
 // routes
 app.get('/', (req, res) => {
-  res.send('jobs api',authRouter);
+  res.send('<h1>Jobs api</h1><a href="/api-docs">Documentation</a>');
 });
+
+app.use('/api-docs',swaggerUI.serve, swaggerUI.setup(swaggerDocumentation))
 
 app.use('/api/v1/auth',authRouter)
 app.use('/api/v1/jobs',authenticationMiddleware,jobsRouter)
